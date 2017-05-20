@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Road map</title>
+</head>
+<body>
+<font size="15" color="blue"> Список дорожных карт </font>
+<script> var i = 0;
+</script>
+{% for road in roads %}
+    <p>
+        <script> document.write(i = i + 1) </script>
+    </p>
+    <p>{{ road.name }} <a> Удаление</a> <a> Показать </a></p>
+{% endfor %}
+<script>
+    var id = new Array(i);
+    var ind = 0;
+</script>
+{% for road in roads %}
+    <script>
+        id[ind] ={{road.rd_id}};
+        ind++;
+    </script>
+{% endfor %}
+<script>
+    var links = document.getElementsByTagName("A");
+    var link;
+    var i;
+    var j = 0;
+    for (i = 0; i < links.length / 2; i++) {
+        j = j + 1;
+        links[j - 1].setAttribute("href", "/delete_roadmap/" + id[i] + "/" + {{ context }});
+        j = j + 1;
+        links[j - 1].setAttribute("href", "/roadmap/" + id[i] + "/" + {{ context }});
+
+    }
+</script>
+<p><a href="/start/{{ context }}">Вернуться на стартовую страницу</a></p>
+<p><a href="/logout/">Выход</a></p>
+</body>
+</html>

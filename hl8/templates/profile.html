@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Profile</title>
+</head>
+<body>
+<font size="15" color="blue"> Профиль </font>
+<table border="1">
+    <caption>Table</caption>
+    <tr>
+        <th>Имя</th>
+        <th>Фамилия</th>
+        <th>Телефон</th>
+        <th>Возраст</th>
+        <th>Регион</th>
+    </tr>
+
+    <tr>
+        <td>{{ first_name }}</td>
+        <td>{{ last_name }}</td>
+        <td>{{ phone }}</td>
+        <td>{{ age }}</td>
+        <td>{{ region }}</td>
+    </tr>
+</table>
+
+<p><a href="/edit_profile/{{ context }}">Изменить профиль</a></p>
+<p><a href="/start/{{ context }}">Вернуться на стартовую страницу</a></p>
+<p><a href="/change_password/{{ context }}">Изменить пароль</a></p>
+</body>
+</html>

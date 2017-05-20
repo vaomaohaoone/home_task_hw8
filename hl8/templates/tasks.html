@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачи</title>
+</head>
+<body>
+<font size="15" color="blue"> Список задач </font>
+<script> var i = 0;
+</script>
+{% for title in titles %}
+    <p>
+        <script> document.write(i = i + 1) </script>
+    </p>
+    <p>{{ title.title }} {{ title.estimate }} {{ title.state }}<a> Изменение</a> <a> Удаление</a>></p>
+{% endfor %}
+<script>
+    var id = new Array(i);
+    var ind = 0;
+</script>
+{% for title in titles %}
+    <script>
+        id[ind] ={{title.my_id}};
+        ind++;
+    </script>
+{% endfor %}
+<script>
+    var links = document.getElementsByTagName("A");
+    var link;
+    var i;
+    var j = 0;
+    for (i = 0; i < links.length; i++) {
+        j = j + 1;
+        links[j - 1].setAttribute("href", "/edit/" + id[i]);
+        j = j + 1;
+        links[j - 1].setAttribute("href", "/delete/" + id[i]);
+
+    }
+</script>
+
+<p><a href="/add/">Добавить задачу</a></p>
+<p><a href="/start_page/">Вернуться на стартовую страницу</a></p>
+</body>
+</html>

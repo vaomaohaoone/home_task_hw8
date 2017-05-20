@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Create</title>
+</head>
+<body>
+<font size="15" color="blue"> Создание задачи </font>
+{% if form.errors %}
+    <p style="color: red;">
+        Исправьте слeдующие ошибки {{ form.errors }}
+    </p>
+{% endif %}
+
+<form action="" method="post">
+    <table>
+        {{ form.as_table }}
+    </table>
+    <input type="submit" value="Сохранить">
+</form>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Points</title>
+</head>
+<body>
+<font size="15" color="blue"> Очки </font>
+<table border="1">
+    <caption>Table</caption>
+    <tr>
+        <th>Месяц</th>
+        <th>Зачислено</th>
+    </tr>
+    {% for key, value in res.items %}
+        <tr>
+        <td> {{ key }} </td>
+            <td> {{ value }} </td>
+        </tr>
+    {% endfor %}
+</table>
+<p><a href="/start_page/">Вернуться на стартовую страницу</a></p>
+</body>
+</html>

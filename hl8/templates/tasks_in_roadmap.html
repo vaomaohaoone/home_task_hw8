@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачи</title>
+</head>
+<body>
+<font size="15" color="blue"> Список задач </font>
+<script> var i = 0;
+</script>
+{% for title in titles %}
+    <p>
+        <script> document.write(i = i + 1) </script>
+    </p>
+    <p>{{ title.title }} {{ title.estimate }} {{ title.state }}<a> Изменение</a> <a> Удаление</a>></p>
+{% endfor %}
+<script>
+    var id = new Array(i);
+    var ind = 0;
+</script>
+{% for title in titles %}
+    <script>
+        id[ind] ={{title.my_id}};
+        ind++;
+    </script>
+{% endfor %}
+<script>
+    var links = document.getElementsByTagName("A");
+    var link;
+    var i;
+    var j = 0;
+    for (i = 0; i < links.length / 2; i++) {
+        j = j + 1;
+        links[j - 1].setAttribute("href", "/edit/" + id[i] + '/'+ {{ context }} + '/' + {{ context1 }});
+        j = j + 1;
+        links[j - 1].setAttribute("href", "/delete/" + id[i] + '/' + {{ context }} + '/'+ {{ context1 }});
+
+    }
+
+</script>
+<p><a>Добавить задачу</a></p>
+<script>
+    var links = document.getElementsByTagName("A");
+    links[links.length - 1].setAttribute("href", "/add_to_roadmap/" +{{context}} + '/' + {{ context1 }});
+</script>
+<p><a>Рассчитать очки</a></p>
+<script>
+    var links = document.getElementsByTagName("A");
+    links[links.length - 1].setAttribute("href", "/points/" +{{context}});
+</script>
+<p><a>Показать статистику</a></p>
+<script>
+    var links = document.getElementsByTagName("A");
+    links[links.length - 1].setAttribute("href", "/created_and_solved/" +{{context}});
+</script>
+
+
+<p><a href="/start/{{ context1 }}">Вернуться на стартовую страницу</a></p>
+<p><a href="/logout/">Выход</a></p>
+</body>
+</html>

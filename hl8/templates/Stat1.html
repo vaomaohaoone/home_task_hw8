@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="rus">
+<head>
+    <meta charset="UTF-8">
+    <title>Задачи</title>
+</head>
+
+    <body>
+<font size="15" color="blue"> Список задач </font>
+<table border="1">
+    <caption>Table</caption>
+    <tr>
+        <th>Неделя</th>
+        <th>Интервал дат</th>
+        <th>Созданные</th>
+        <th>Решенные</th>
+    </tr>
+{% for key, value in ctx.items %}
+<tr>
+    <td> {{ key }} </td>
+{%  for k in value%}
+    <td> {{ k }} </td>
+{% endfor %}
+</tr>
+{% endfor %}
+</table>
+</body>
+</html>
