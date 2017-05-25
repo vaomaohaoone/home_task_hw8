@@ -43,12 +43,11 @@ class RoadMap(models.Model):
         return self.name
 
 
-STATE_CHOICES = (('in_progress', 'in_progress'), ('ready', 'ready'),)
-
 
 class Task(models.Model):
+    STATE_CHOICES = (('in progress', 'in progress'), ('ready', 'ready'),)
     title = models.CharField(max_length=100)
-    state = models.CharField(max_length=11, choices=STATE_CHOICES, default='in_progress')
+    state = models.CharField(max_length=11, choices=STATE_CHOICES, default='in progress')
     estimate = models.DateField(default=utils.timezone.now)
     my_id = models.AutoField(primary_key=True)
     road_map = models.ForeignKey(RoadMap, related_name='tasks')
@@ -56,6 +55,17 @@ class Task(models.Model):
 
     class Meta:
         ordering = ['state', 'estimate']
+
+    def calculate_points(self, max_estimate):
+        if self.state == "ready":
+            try:
+                points = ((datetime.date.today() - self.create_date) / (self.estimate - self.create_date)) + (
+                (self.estimate - self.create_date) / max_estimate)
+                return points
+            except ZeroDivisionError:
+                return 0
+        else:
+            return 0
 
 
 class Scores(models.Model):

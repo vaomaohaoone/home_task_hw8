@@ -1,7 +1,7 @@
 from django.shortcuts import render_to_response, get_object_or_404
 from django.http import HttpResponseRedirect
 from myapp.forms import CreateForm, EditForm, CreateRoadMap, AnotherCreateForm, CreateUser, LoginForm, EditUser, \
-    EditPassword
+    EditPassword, EnterEmail
 from django.views.decorators.csrf import csrf_exempt
 from .models import Task, RoadMap, Scores, User
 from django.db import transaction
@@ -19,17 +19,32 @@ def show_tasks(request):
     return render_to_response('tasks.html', ctx)
 
 
+
 @csrf_exempt
 def add_task(request):
     if request.method == 'POST':
-        instance = get_object_or_404(RoadMap, rd_id=request.POST.get('road_map'))
-        a = Task(title=request.POST.get('title'),
-                 estimate=request.POST.get('estimate'),
-                 road_map=instance)
-        a.save()
-        return HttpResponseRedirect('/tasks/')
+        form = CreateForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return HttpResponseRedirect('/tasks/')
     form = CreateForm()
     return render_to_response('form1.html', {'form': form})
+
+
+@csrf_exempt
+def add_to_roadmap(request, context, context1):
+    if request.method == 'POST':
+        form = AnotherCreateForm(request.POST)
+        if form.is_valid():
+            a = Task(title=request.POST.get('title'),
+                     estimate=request.POST.get('estimate'),
+                     road_map_id=str(context)
+                     )
+            a.save()
+            my_url = "/roadmap/" + str(context) + "/" + str(context1) + "/"
+            return HttpResponseRedirect(my_url)
+    form = AnotherCreateForm()
+    return render_to_response('form1.html', {'form': form, 'context': context})
 
 
 @csrf_exempt
@@ -45,6 +60,16 @@ def edit_task(request, context, context1, context2):
         form = EditForm(instance=instance)
     return render_to_response('form2.html', {'form': form})
 
+@csrf_exempt
+def enter_email(request):
+    form = EnterEmail()
+    if request.method == 'POST':
+        a = User.objects.filter(email=request.POST.get('email'))
+        form = EnterEmail(request.POST, instance=a[0])
+        if form.is_valid():
+            string = "/change_password/" + str(a[0].id) + "/"
+            return HttpResponseRedirect(string)
+    return render_to_response('email.html', {'form': form})
 
 @csrf_exempt
 def delete_task(request, context, context1, context2):
@@ -77,7 +102,8 @@ def create_roadmap(request, context):
 @csrf_exempt
 def delete_roadmap(request, context, context1):
     get_object_or_404(RoadMap, rd_id=context).delete()
-    return start(request, context1)
+    my_url = "/start/"+str(context1)+"/"
+    return HttpResponseRedirect(my_url)
 
 
 @csrf_exempt
@@ -93,18 +119,6 @@ def roadmap(request, context, context1):
     ctx = {'titles': tasks, 'context': context, 'context1': context1}
     return render_to_response('tasks_in_roadmap.html', ctx)
 
-
-@csrf_exempt
-def add_to_roadmap(request, context, context1):
-    if request.method == 'POST':
-        a = Task(title=request.POST.get('title'),
-                 estimate=request.POST.get('estimate'),
-                 road_map_id=str(context)
-                 )
-        a.save()
-        return roadmap(request, context, context1)
-    form = AnotherCreateForm()
-    return render_to_response('form1.html', {'form': form, 'context': context})
 
 
 @csrf_exempt
@@ -182,7 +196,7 @@ def points(request, context):
     tasks = Task.objects.filter(road_map=context)
     diff = calculate_max_estimate(tasks)
     for values in tasks:
-        a = Scores(task_id=values.my_id, points=calculate_points(values, diff))
+        a = Scores(task_id=values.my_id, points=values.calculate_points(diff))
         a.save()
     point = Scores.objects.all()
     res = {}
@@ -195,20 +209,26 @@ def points(request, context):
         else:
             res[string] = res[string] + key.points
     Scores.objects.all().delete()
-    return render_to_response('points.html', {"res": res})
+    return render_to_response('points.html', {"res": res, 'context': context})
 
 
 @csrf_exempt
 def create_use(request):
     if request.method == 'POST':
+        ag=''
+        reg=''
+        if request.POST.get('age'):
+            ag = request.POST.get('age')
+        if request.POST.get('region'):
+            reg = request.POST.get('region')
         user = User.objects.create_user(
             email=request.POST.get('email'),
             password=request.POST.get('password'),
             first_name=request.POST.get('first_name'),
             last_name=request.POST.get('last_name'),
             phone=request.POST.get('phone'),
-            age=request.POST.get('age'),
-            region=request.POST.get('region')
+            age=ag,
+            region=reg
         )
         return HttpResponseRedirect('/start_page/')
     form = CreateUser()
@@ -227,7 +247,8 @@ def login_view(request):
                 return render_to_response('login.html')
             login(request, user)
             context = user.id
-            return start(request, context)
+            my_url = "/start/"+str(context)+"/"
+            return HttpResponseRedirect(my_url)
     return render_to_response('login.html', {'form': form})
 
 
@@ -294,15 +315,6 @@ def success(request, context):
     instance.tmp_password = ''
     instance.save()
     return render_to_response('success.html')
-
-
-def calculate_points(self, max_estimate):
-    if self.state == "ready":
-        points = ((datetime.date.today() - self.create_date) / (self.estimate - self.create_date)) + (
-            (self.estimate - self.create_date) / max_estimate)
-        return points
-    else:
-        return 0
 
 
 def get_table(my_dict, created_end, solved):

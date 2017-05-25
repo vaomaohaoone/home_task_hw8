@@ -4,29 +4,30 @@
     <meta charset="UTF-8">
     <title>Profile</title>
 </head>
-<body>
-<font size="15" color="blue"> Профиль </font>
-<table border="1">
-    <caption>Table</caption>
+<body bgcolor="#e6e6fa">
+<font size="15" color="blue" style="margin-left: 39%"> Профиль </font>
+<table bgcolor="#d3d3d3" style="margin-left: 31%; margin-right: 28%; margin-top: 4%" border="1">
+    <caption><font size="6" color="blue">Данные</font></caption>
+
     <tr>
-        <th>Имя</th>
-        <th>Фамилия</th>
-        <th>Телефон</th>
-        <th>Возраст</th>
-        <th>Регион</th>
+        <th><font color="#191970">Имя</font></th>
+        <th><font color="#191970">Фамилия</font></th>
+        <th><font color="#191970">Телефон</font></th>
+        <th><font color="#191970">Возраст</font></th>
+        <th><font color="#191970">Регион</font></th>
     </tr>
 
     <tr>
-        <td>{{ first_name }}</td>
-        <td>{{ last_name }}</td>
-        <td>{{ phone }}</td>
-        <td>{{ age }}</td>
-        <td>{{ region }}</td>
+        <td><font color="navy">{{ first_name }}</font></td>
+        <td><font color="navy">{{ last_name }}</font></td>
+        <td><font color="navy">{{ phone }}</font></td>
+        <td><font color="navy">{{ age }}</font></td>
+        <td><font color="navy">{{ region }}</font></td>
     </tr>
 </table>
 
-<p><a href="/edit_profile/{{ context }}">Изменить профиль</a></p>
-<p><a href="/start/{{ context }}">Вернуться на стартовую страницу</a></p>
-<p><a href="/change_password/{{ context }}">Изменить пароль</a></p>
+<p style="margin-top: -14%; margin-left: 85%"><a href="/edit_profile/{{ context }}">Изменить профиль</a></p>
+<p style="margin-left: 85%"><a href="/start/{{ context }}">Вернуться на стартовую страницу</a></p>
+<p style="margin-left: 85%"><a href="/change_password/{{ context }}">Изменить пароль</a></p>
 </body>
 </html>

@@ -17,7 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 from myapp.views import show_tasks, add_task, edit_task, delete_task, create_roadmap, start, delete_roadmap, roadmaps, \
     roadmap, add_to_roadmap, created_and_solved, points, create_use, start_page, login_view, logout_view, edit_profile, \
-    get_profile, change_password, was_sent, success
+    get_profile, change_password, was_sent, success, enter_email
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
@@ -41,6 +41,7 @@ urlpatterns = [
     url(r'^profile/(?P<context>[0-9]+)', get_profile),
     url(r'^was_sent/(?P<context>[0-9]+)', was_sent),
     url(r'^change_password/(?P<context>[0-9]+)', change_password),
-    url(r'^success/(?P<context>[0-9]+)', success)
+    url(r'^success/(?P<context>[0-9]+)', success),
+    url(r'^password/', enter_email)
 
 ]

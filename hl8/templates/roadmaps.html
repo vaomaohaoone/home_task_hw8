@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <title>Road map</title>
 </head>
-<body>
-<font size="15" color="blue"> Список дорожных карт </font>
+<body bgcolor="#e6e6fa">
+<font size="15" color="blue" style="margin-left: 29%"> Список дорожных карт </font>
 <script> var i = 0;
 </script>
+<table style="margin-top: 3%;margin-left: 30%">
 {% for road in roads %}
-    <p>
-        <script> document.write(i = i + 1) </script>
-    </p>
-    <p>{{ road.name }} <a> Удаление</a> <a> Показать </a></p>
+    <tr>
+    <th><font color="red", size="5">  <script> document.write(i = i + 1) </script></font></th>
+        <td><font color="#191970", size="5" style="margin-top: 5%">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{ road.name }}&nbsp;&nbsp; <a> Удаление</a>&nbsp;&nbsp; <a> Показать </a></font></td>
+    </tr>
 {% endfor %}
+</table>
 <script>
     var id = new Array(i);
     var ind = 0;
@@ -37,7 +39,7 @@
 
     }
 </script>
-<p><a href="/start/{{ context }}">Вернуться на стартовую страницу</a></p>
-<p><a href="/logout/">Выход</a></p>
+<p style="margin-left: 80%; margin-top: -8%"><a href="/start/{{ context }}">Вернуться на стартовую страницу</a></p>
+<p style="margin-left: 80%; margin-top: 2%"><a href="/logout/">Выход</a></p>
 </body>
 </html>

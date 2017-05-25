@@ -25,7 +25,7 @@ SECRET_KEY = '!&49or!-+v8xzd8_(t9==%1h@dq=g6=(v7s&cv40&_cghl1ghd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["10.3.13.124"]
 
 
 # Application definition
@@ -82,7 +82,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'TASK2',
         'USER': 'root',
-        'PASSWORD': '',
+        'PASSWORD': 'k18029711t',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -110,9 +110,11 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # Internationalization
 # https://docs.djangoproject.com/en/1.11/topics/i18n/
-
-LANGUAGE_CODE = 'en-us'
-
+ugettext = lambda s: s
+LANGUAGES = (
+    ('en', ugettext('English')),
+    ('ru', ugettext('Russian')),
+)
 TIME_ZONE = 'UTC'
 
 USE_I18N = True
@@ -133,7 +135,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'timofeev.kirill48@gmail.com'
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_PASSWORD = 'k18029711t'
 
 
 

@@ -4,16 +4,41 @@
     <meta charset="UTF-8">
     <title>Задачи</title>
 </head>
-<body>
+
+<div style="color: red">
+<header >
+    <ul class="menu" style="position: absolute; margin-left: 40%">
+<li ><a href="/add_to_roadmap/{{ context }}/{{ context1 }}">Добавить задачу</a></li>
+<li ><a href="/points/{{ context }}">Рассчитать очки</a></li>
+<li ><a href="/created_and_solved/{{ context }}">Показать статистику</a></li>
+<li ><a href="/start/{{ context1 }}">Вернуться на стартовую страницу</a></li>
+<li ><a href="/logout/">Выход</a></li>
+    </ul>
+</header>
+
+</div>
+<style>
+header
+    {
+    width: 100%;
+    background: #D8E3AB;
+    height: 120px;
+    }
+</style>
+<body bgcolor="#e6e6fa">
 <font size="15" color="blue"> Список задач </font>
 <script> var i = 0;
 </script>
+<p>
+<table>
 {% for title in titles %}
-    <p>
-        <script> document.write(i = i + 1) </script>
-    </p>
-    <p>{{ title.title }} {{ title.estimate }} {{ title.state }}<a> Изменение</a> <a> Удаление</a>></p>
+<tr>
+    <th><font color="red">  <script> document.write(i = i + 1) </script></font></th>
+    <td><font color="#191970", style="margin-top: 5%"> &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;{{ title.title }} &nbsp; &nbsp; &nbsp; {{ title.estimate }} &nbsp; {{ title.state }} &nbsp; &nbsp;</font><a> Изменение</a> &nbsp; &nbsp; <a> Удаление</a></td>
+</tr>
 {% endfor %}
+</table>
+
 <script>
     var id = new Array(i);
     var ind = 0;
@@ -28,7 +53,7 @@
     var links = document.getElementsByTagName("A");
     var link;
     var i;
-    var j = 0;
+    var j = 5;
     for (i = 0; i < links.length / 2; i++) {
         j = j + 1;
         links[j - 1].setAttribute("href", "/edit/" + id[i] + '/'+ {{ context }} + '/' + {{ context1 }});
@@ -38,24 +63,8 @@
     }
 
 </script>
-<p><a>Добавить задачу</a></p>
-<script>
-    var links = document.getElementsByTagName("A");
-    links[links.length - 1].setAttribute("href", "/add_to_roadmap/" +{{context}} + '/' + {{ context1 }});
-</script>
-<p><a>Рассчитать очки</a></p>
-<script>
-    var links = document.getElementsByTagName("A");
-    links[links.length - 1].setAttribute("href", "/points/" +{{context}});
-</script>
-<p><a>Показать статистику</a></p>
-<script>
-    var links = document.getElementsByTagName("A");
-    links[links.length - 1].setAttribute("href", "/created_and_solved/" +{{context}});
-</script>
 
-
-<p><a href="/start/{{ context1 }}">Вернуться на стартовую страницу</a></p>
-<p><a href="/logout/">Выход</a></p>
 </body>
+
+
 </html>

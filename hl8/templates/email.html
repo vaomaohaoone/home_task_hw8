@@ -2,10 +2,9 @@
 <html lang="rus">
 <head>
     <meta charset="UTF-8">
-    <title>Edit</title>
+    <title>Forgot password </title>
 </head>
 <body bgcolor="#e6e6fa">
-<font size="15" color="blue"> Редактирование профиля </font>
 {% if form.errors %}
     <p style="color: red;">
         Исправьте слeдующие ошибки {{ form.errors }}
@@ -15,10 +14,9 @@
 <form action="" method="post">
     <table>
         {{ form.as_table }}
-
     </table>
     <input type="submit" value="Сохранить">
 </form>
-
+<p><a href="/start_page/">Вернуться на стартовую страницу</a></p>
 </body>
 </html>

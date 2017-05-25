@@ -4,16 +4,18 @@
     <meta charset="UTF-8">
     <title>Задачи</title>
 </head>
-<body>
+<body bgcolor="#e6e6fa">
 <font size="15" color="blue"> Список задач </font>
 <script> var i = 0;
 </script>
+<p>
 {% for title in titles %}
-    <p>
-        <script> document.write(i = i + 1) </script>
-    </p>
+    <tr>
+    <th><font color="red">  <script> document.write(i = i + 1) </script></font></th>
     <p>{{ title.title }} {{ title.estimate }} {{ title.state }}<a> Изменение</a> <a> Удаление</a>></p>
+    </tr>
 {% endfor %}
+</p>
 <script>
     var id = new Array(i);
     var ind = 0;
