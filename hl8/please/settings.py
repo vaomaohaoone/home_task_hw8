@@ -25,7 +25,6 @@ SECRET_KEY = '!&49or!-+v8xzd8_(t9==%1h@dq=g6=(v7s&cv40&_cghl1ghd'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["10.3.13.124"]
 
 
 # Application definition
@@ -82,7 +81,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'TASK2',
         'USER': 'root',
-        'PASSWORD': 'k18029711t',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -135,7 +134,7 @@ EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'timofeev.kirill48@gmail.com'
-EMAIL_HOST_PASSWORD = 'k18029711t'
+EMAIL_HOST_PASSWORD = ''
 
 
 
